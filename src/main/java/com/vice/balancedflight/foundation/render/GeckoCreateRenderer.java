@@ -1,12 +1,12 @@
 package com.vice.balancedflight.foundation.render;
 
 
-import com.jozufozu.flywheel.backend.Backend;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
+import dev.engine_room.flywheel.api.visualization.VisualizationManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -100,7 +100,7 @@ public class GeckoCreateRenderer<T extends KineticBlockEntity & GeoAnimatable> e
     protected void renderSafe(KineticBlockEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay)
     {
         this.renderGecko((T) te, partialTicks, ms, buffer, light);
-        if (Backend.canUseInstancing(te.getLevel()))
+        if (VisualizationManager.supportsVisualization(te.getLevel()))
             return;
 
         renderCreate(te, te.getBlockPos(), te.getBlockState(), partialTicks, ms, buffer, light, overlay);

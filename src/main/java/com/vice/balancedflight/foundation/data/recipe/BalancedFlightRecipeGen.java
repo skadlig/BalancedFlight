@@ -3,9 +3,9 @@ package com.vice.balancedflight.foundation.data.recipe;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
-import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.simibubi.create.foundation.data.recipe.*;
 import com.vice.balancedflight.BalancedFlight;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -59,7 +59,7 @@ public class BalancedFlightRecipeGen extends CreateRecipeProvider {
     GeneratedRecipe mechanicalCrafting(Supplier<ItemLike> result, int amount, String suffix, UnaryOperator<MechanicalCraftingRecipeBuilder> builder) {
         return register(consumer -> {
             MechanicalCraftingRecipeBuilder b = builder.apply(MechanicalCraftingRecipeBuilder.shapedRecipe(result.get(), amount));
-            ResourceLocation location = Create.asResource("mechanical_crafting/" + RegisteredObjects.getKeyOrThrow(result.get().asItem()).getPath() + suffix);
+            ResourceLocation location = Create.asResource("mechanical_crafting/" + CatnipServices.REGISTRIES.getKeyOrThrow(result.get().asItem()).getPath() + suffix);
             b.build(consumer, location);
         });
     }

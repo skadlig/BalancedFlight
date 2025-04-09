@@ -1,16 +1,18 @@
 package com.vice.balancedflight.content.flightAnchor.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
-import com.simibubi.create.foundation.render.CachedBufferer;
-import com.simibubi.create.foundation.render.SuperByteBuffer;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
-import com.simibubi.create.foundation.utility.Color;
-import com.simibubi.create.foundation.utility.Iterate;
 import com.vice.balancedflight.content.flightAnchor.entity.FlightAnchorEntity;
 import com.vice.balancedflight.foundation.render.ICreateSafeRenderer;
+import net.createmod.catnip.animation.AnimationTickHolder;
+import net.createmod.catnip.data.Iterate;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SuperByteBuffer;
+import net.createmod.catnip.theme.Color;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -48,7 +50,7 @@ public class FlightAnchorSafeRenderer implements ICreateSafeRenderer
             angle += offset;
             angle = angle / 180f * (float) Math.PI;
 
-            SuperByteBuffer shaft = CachedBufferer.partialFacing(AllPartialModels.SHAFT_HALF, blockState, direction);
+            SuperByteBuffer shaft = CachedBuffers.partialFacing(AllPartialModels.SHAFT_HALF, blockState, direction);
 
             if (te != null) {
                 KineticBlockEntityRenderer.kineticRotationTransform(shaft, te, axis, angle, light);
@@ -68,7 +70,7 @@ public class FlightAnchorSafeRenderer implements ICreateSafeRenderer
             }
             else {
                 shaft.light(light);
-                shaft.rotateCentered(Direction.get(Direction.AxisDirection.POSITIVE, axis), angle);
+                shaft.rotateCentered(angle, Direction.get(Direction.AxisDirection.POSITIVE, axis));
                 shaft.color(Color.WHITE);
 
                 ms.pushPose();

@@ -1,5 +1,6 @@
 package com.vice.balancedflight;
 
+import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
@@ -10,6 +11,6 @@ public class BalancedFlightClient
     }
 
     public static void clientInit(FMLClientSetupEvent event) {
-        AllPonderScenes.register();
+        PonderIndex.addPlugin(new BalancedFlightPonderPlugin());
     }
 }

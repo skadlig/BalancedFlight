@@ -1,13 +1,10 @@
 package com.vice.balancedflight;
 
 import com.simibubi.create.AllCreativeModeTabs;
-import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
-import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.item.TooltipModifier;
-import com.simibubi.create.foundation.ponder.PonderLocalization;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -21,6 +18,8 @@ import com.vice.balancedflight.foundation.RegistrateExtensions;
 import com.vice.balancedflight.foundation.config.BalancedFlightConfig;
 import com.vice.balancedflight.foundation.data.recipe.BalancedFlightRecipeGen;
 import lombok.experimental.ExtensionMethod;
+import net.createmod.catnip.lang.FontHelper;
+import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -50,7 +49,6 @@ public class BalancedFlight {
     public static final BlockEntry<? extends Block> FLIGHT_ANCHOR_BLOCK = BalancedFlight.CREATE_REGISTRATE
             .object("flight_anchor")
             .block(FlightAnchorBlock::new)
-            .transform(BlockStressDefaults.setImpact(256.0D))
             .properties(properties -> BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(10).sound(SoundType.NETHERITE_BLOCK).noOcclusion())
             .defaultLoot()
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -62,7 +60,7 @@ public class BalancedFlight {
 
     public static final BlockEntityEntry<FlightAnchorEntity> FLIGHT_ANCHOR_BLOCK_ENTITY = BalancedFlight.CREATE_REGISTRATE
             .blockEntity("flight_anchor", FlightAnchorEntity::new)
-            .instance(() -> FlightAnchorKineticInstance::new)
+            .visual(() -> FlightAnchorKineticInstance::new)
             .validBlock(FLIGHT_ANCHOR_BLOCK)
             .renderer(() -> AllGeckoRenderers.FlightAnchorGeckoRenderer.TileRenderer::apply)
             .register();
@@ -100,14 +98,11 @@ public class BalancedFlight {
         if (event.includeServer()) {
             gen.addProvider(true, new BalancedFlightRecipeGen(output));
         }
-
-        AllPonderScenes.register();
-        PonderLocalization.provideRegistrateLang(CREATE_REGISTRATE);
     }
 
     static {
         CREATE_REGISTRATE.setCreativeTab(AllCreativeModeTabs.BASE_CREATIVE_TAB);
-        CREATE_REGISTRATE.setTooltipModifierFactory((item) -> new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE)
+        CREATE_REGISTRATE.setTooltipModifierFactory((item) -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
                 .andThen(TooltipModifier.mapNull(KineticStats.create(item)))
         );
     }

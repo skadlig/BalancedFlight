@@ -4,8 +4,8 @@ import com.google.common.collect.Lists;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.ponder.PonderWorld;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
+import net.createmod.catnip.animation.AnimationTickHolder;
+import net.createmod.ponder.api.level.PonderLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -40,7 +40,7 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
 
     public void setActive(boolean active)
     {
-        if (getWorld() instanceof PonderWorld)
+        if (getWorld() instanceof PonderLevel)
             return;
         
         if (!active)
@@ -98,7 +98,7 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
     }
 
     public static void beaconTick(Level level, BlockPos blockPos, FlightAnchorEntity entity) {
-        if (level instanceof PonderWorld ponderWorld) {
+        if (level instanceof PonderLevel ponderWorld) {
             if (entity.beamSections.size() > 0)
                 return;
 

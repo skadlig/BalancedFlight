@@ -1,8 +1,8 @@
 package com.vice.balancedflight.content.flightAnchor.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.vice.balancedflight.content.flightAnchor.entity.FlightAnchorEntity;
+import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;

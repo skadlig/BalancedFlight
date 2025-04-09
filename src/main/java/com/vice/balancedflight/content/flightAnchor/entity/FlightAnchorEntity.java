@@ -5,8 +5,10 @@ import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.vice.balancedflight.BalancedFlight;
+import com.vice.balancedflight.BalancedFlightClient;
 import com.vice.balancedflight.content.flightAnchor.FlightAnchorBlock;
 import com.vice.balancedflight.AllGeckoRenderers;
+import com.vice.balancedflight.foundation.config.BalancedFlightConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -68,5 +70,12 @@ public class FlightAnchorEntity extends KineticBlockEntity implements GeoBlockEn
 
     public List<BeaconBlockEntity.BeaconBeamSection> getBeamSections() {
         return this.beamSections;
+    }
+
+    @Override
+    public float calculateStressApplied() {
+        float impact = BalancedFlightConfig.anchorStress.get();
+        this.lastStressApplied = impact;
+        return impact;
     }
 }

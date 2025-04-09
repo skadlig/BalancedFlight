@@ -114,6 +114,10 @@ repositories {
         name = "Curios"
         url = "https://maven.theillusivec4.top/"
     }
+    maven {
+        // Create, Ponder, Flywheel
+        url = "https://maven.createmod.net"
+    }
 }
 
 
@@ -134,13 +138,15 @@ dependencies {
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}")
 
-    implementation fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") {
+    implementation fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:all") {
         transitive = false
     }
+    implementation fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}")
     implementation fg.deobf("curse.maven:geckolib-388172:4573048")
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
-    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
+    compileOnly fg.deobf("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:${flywheel_version}")
+    runtimeOnly fg.deobf("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
 }

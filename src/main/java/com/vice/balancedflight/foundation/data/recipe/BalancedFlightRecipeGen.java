@@ -4,6 +4,7 @@ import com.simibubi.create.Create;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 import com.simibubi.create.foundation.data.recipe.*;
+import com.simibubi.create.api.data.recipe.*;
 import com.vice.balancedflight.BalancedFlight;
 import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.data.PackOutput;
@@ -17,12 +18,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-public class BalancedFlightRecipeGen extends CreateRecipeProvider {
+public class BalancedFlightRecipeGen extends MechanicalCraftingRecipeGen {
     GeneratedRecipe ASCENDED_FLIGHT_RING;
     GeneratedRecipe FLIGHT_ANCHOR;
 
     public BalancedFlightRecipeGen(PackOutput dataGenerator) {
-        super(dataGenerator);
+        super(dataGenerator, BalancedFlight.MODID);
 
         ASCENDED_FLIGHT_RING = mechanicalCrafting(BalancedFlight.ASCENDED_FLIGHT_RING::get, 1, "", (b) -> b
                 .key('G', Ingredient.of(Blocks.GOLD_BLOCK))
